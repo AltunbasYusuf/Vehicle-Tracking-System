@@ -1,102 +1,106 @@
-import java.util.Scanner;
+import domain.maintenance.*;
+import domain.vehicle.Vehicle;
+
+import java.util.*;
+
 public class Quick_Setup {
     private static final Scanner input = new Scanner(System.in);
 
+    public static void quickSetup() {
+        System.out.println("Welcome to Quick Setup! Please choose the vehicle:\n1. Car\n2. Motorcycle\n3. Truck");
+        String vehicleType = VehicleType();
 
+        List<VehiclePart> parts = new ArrayList<>();
 
-    //Araç ve motor özelliklerini kullanıcıdan alacak Quick Setup arayüzü
-    public static Vehicle quickSetup(){
-        System.out.println("Welcome to Quick Setup! Please choose the vehicle:\n" + "1.Car\n" + "2.Motorcycle\n" + "3.Truck");
-        String vehicleType=VehicleType();
-        System.out.println("Please give the "+vehicleType+ " model:");
-        String model=model();
-        System.out.println("Please give the vehicle's motor type (diesel,electric or hybrid):");
-        String motorType=motorType();
-        System.out.println("Please give the horsepower of vehicle's motor:");
-        double horsePower=horsePower();
-        System.out.println("Please give the fuel type of vehicle's motor (Gasoline/Diesel/LPG/Electric) :");
-        String fuelType= fuelType();
-        System.out.println("Please give the fuel consumption of vehicle's motor (L/100km or kWh/100km) :");
-        double fuelConsumption=fuelConsumption();
-        System.out.println("Please give the CO₂ Emission (g/km) of vehicle's motor:");
-        double co2Emission=co2Emission();
-        System.out.println("Please give the vehicle's tire type(summer/winter):");
-        String tireType=tireType();
-        Motor vehicleMotor=new Motor(motorType,horsePower,fuelConsumption,co2Emission);
-        Vehicle vehicle= new Vehicle(vehicleType,vehicleMotor,model,tireType,fuelType);
-        return vehicle;
-    }
+        // 1. Motor
+        System.out.println("Enter motor type (diesel, electric, hybrid):");
+        String motorType = input.nextLine();
+        System.out.println("Enter horsepower:");
+        double horsePower = Double.parseDouble(input.nextLine());
+        System.out.println("Enter fuel consumption (L/100km or kWh/100km):");
+        double fuelConsumption = Double.parseDouble(input.nextLine());
+        System.out.println("Enter CO2 emission (g/km):");
+        double co2Emission = Double.parseDouble(input.nextLine());
 
+        Map<String, Object> motorParams = new HashMap<>();
+        motorParams.put("motorType", motorType);
+        motorParams.put("horsePower", horsePower);
+        motorParams.put("fuelConsumption", fuelConsumption);
+        motorParams.put("co2Emission", co2Emission);
 
+        VehiclePart motor = PartFactory.createPart("motor", motorParams);
+        parts.add(motor);
 
-    public static String model() {
-        String model = input.nextLine();
-    return model;
-    }
+        // 2. Tire
+        System.out.println("Enter tire season type (summer, winter):");
+        String seasonType = input.nextLine();
+        System.out.println("Enter tread depth (mm):");
+        double treadDepth = Double.parseDouble(input.nextLine());
 
-    public static String fuelType(){
-        String fuelType=input.nextLine();
-        return fuelType;
-    }
+        Map<String, Object> tireParams = new HashMap<>();
+        tireParams.put("seasonType", seasonType);
+        tireParams.put("treadDepth", treadDepth);
 
-    public static String tireType() {
-        String tireType = input.nextLine();
-        if (tireType.equalsIgnoreCase("summer")){
-            tireType="summer";
+        VehiclePart tire = PartFactory.createPart("tire", tireParams);
+        parts.add(tire);
+
+        // 3. Battery
+        /*
+        System.out.println("Enter battery capacity (Ah):");
+        int capacityAh = Integer.parseInt(input.nextLine());
+
+        Map<String, Object> batteryParams = new HashMap<>();
+        batteryParams.put("capacityAh", capacityAh);
+
+        VehiclePart battery = PartFactory.createPart("battery", batteryParams);
+        parts.add(battery);
+        */
+
+        // 4. Brake System
+        System.out.println("Enter brake pad wear level (%):");
+        double padWear = Double.parseDouble(input.nextLine());
+        System.out.println("Does the vehicle have ABS? (true/false):");
+        boolean absEnabled = Boolean.parseBoolean(input.nextLine());
+
+        Map<String, Object> brakeParams = new HashMap<>();
+        brakeParams.put("padWearLevel", padWear);
+        brakeParams.put("absEnabled", absEnabled);
+
+        VehiclePart brake = PartFactory.createPart("brake", brakeParams);
+        parts.add(brake);
+
+        // 5. Cooling System
+        System.out.println("Enter antifreeze level (liters):");
+        double antifreeze = Double.parseDouble(input.nextLine());
+        System.out.println("Enter minimum required antifreeze level:");
+        double minLevel = Double.parseDouble(input.nextLine());
+
+        Map<String, Object> coolingParams = new HashMap<>();
+        coolingParams.put("antifreezeLevel", antifreeze);
+        coolingParams.put("minLevel", minLevel);
+
+        VehiclePart cooling = PartFactory.createPart("cooling_system", coolingParams);
+        parts.add(cooling);
+
+        // Vehicle oluştur
+        Vehicle vehicle = new Vehicle(vehicleType, parts);
+        System.out.println("Quick setup complete. Vehicle and parts initialized.");
+
+        // Opsiyonel: Parçaları ekrana bas
+        for (VehiclePart part : vehicle.getParts()) {
+            System.out.println("- " + part.getPartType() + " (Bakım tarihi: " + part.getNextMaintenanceDate() + ")");
         }
-        else if (tireType.equalsIgnoreCase("winter")){
-            tireType="winter";
-        }
-        else {
-            System.out.println("Undefined type");
-            return tireType();
-        }
-        return tireType;
     }
 
-
-    public static double co2Emission(){
-        double co2Emission= Double.parseDouble(input.nextLine());
-        return co2Emission;
-    }
-
-
-
-    public static double fuelConsumption(){
-        double fuelConsumption= Double.parseDouble(input.nextLine());
-        return fuelConsumption;
-    }
-
-
-    public static double horsePower(){
-        double horsePower= Double.parseDouble(input.nextLine());
-        return horsePower;
-    }
-
-
-    public static String motorType() {
-        String motorType=input.nextLine();
-        if (motorType.equalsIgnoreCase("diesel"))
-            motorType="diesel";
-        if (motorType.equalsIgnoreCase("electric"))
-            motorType="electric";
-        if (motorType.equalsIgnoreCase("hybrid"))
-            motorType="hybrid";
-        return motorType;
-    }
-
-
-    public static String VehicleType(){
-        String vehicleType= input.nextLine();
-        if(vehicleType.equalsIgnoreCase("car")||vehicleType.equalsIgnoreCase("1")||vehicleType.equalsIgnoreCase("1.")){
-            vehicleType="Car";
+    public static String VehicleType() {
+        String vehicleType = input.nextLine();
+        if (vehicleType.equalsIgnoreCase("car") || vehicleType.equals("1")) {
+            return "Car";
+        } else if (vehicleType.equalsIgnoreCase("motorcycle") || vehicleType.equals("2")) {
+            return "Motorcycle";
+        } else if (vehicleType.equalsIgnoreCase("truck") || vehicleType.equals("3")) {
+            return "Truck";
         }
-        if(vehicleType.equalsIgnoreCase("motorcycle")||vehicleType.equalsIgnoreCase("2")||vehicleType.equalsIgnoreCase("2.")||vehicleType.equalsIgnoreCase("motor")){
-            vehicleType="Motorcycle";
-        }
-        if(vehicleType.equalsIgnoreCase("truck")||vehicleType.equalsIgnoreCase("3")||vehicleType.equalsIgnoreCase("3.")){
-            vehicleType="Truck";
-        }
-    return vehicleType;
+        return "Unknown";
     }
 }
