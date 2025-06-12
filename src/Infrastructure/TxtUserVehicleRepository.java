@@ -20,7 +20,7 @@ public class TxtUserVehicleRepository implements UserVehicleRepositoryInterface 
     @Override
     public void assignVehicleToUser(String email, Vehicle vehicle) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(email + "," + vehicle.getVehicleType() + "," + vehicle.getBrand() + "," + vehicle.getModel());
+            writer.write(email  + "," + vehicle.getBrand() + "," + vehicle.getModel() + "," + vehicle.getVehicleSegment());
             writer.newLine();
         }
     }
@@ -36,12 +36,12 @@ public class TxtUserVehicleRepository implements UserVehicleRepositoryInterface 
                 if (parts.length != 4) continue;
                 if (!parts[0].equals(email)) continue;
 
-                String type = parts[1];
-                String brand = parts[2];
-                String model = parts[3];
+                String brand = parts[1];
+                String model = parts[2];
+                String segment = parts[3];
 
                 for (Vehicle v : allVehicles) {
-                    if (v.getVehicleType().equals(type) &&
+                    if (v.getVehicleSegment().equals(segment) &&
                             v.getBrand().equals(brand) &&
                             v.getModel().equals(model)) {
                         return v;

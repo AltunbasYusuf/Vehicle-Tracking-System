@@ -28,7 +28,6 @@ public class OwnerDashboard {
 
         while (true) {
             System.out.println("\n📋 Owner Dashboard - " + user.getName());
-            System.out.println("Araç Tipi: " + vehicle.getVehicleType());
             System.out.println("1. Show vehicle parts conditions");
             System.out.println("2. Add a maintenance request");
             System.out.println("3. Show maintenance history");

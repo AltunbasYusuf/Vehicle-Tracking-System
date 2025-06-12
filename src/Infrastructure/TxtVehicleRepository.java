@@ -18,7 +18,7 @@ public class TxtVehicleRepository implements SellerVehicleRepositoryInterface {
     @Override
     public void saveVehicle(Vehicle vehicle) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(vehicle.getVehicleType() + "," + vehicle.getBrand() + "," + vehicle.getModel());
+            writer.write( vehicle.getBrand() + "," + vehicle.getModel()+ "," + vehicle.getVehicleSegment());
             writer.newLine();
         }
     }
@@ -37,8 +37,9 @@ public class TxtVehicleRepository implements SellerVehicleRepositoryInterface {
                 String type = parts[0];
                 String brand = parts[1];
                 String model = parts[2];
+                String segment = parts[3];
 
-                Vehicle vehicle = new Vehicle(type, brand, model); // Part eklemeyi runtime’da yapabilirsin
+                Vehicle vehicle = new Vehicle(brand, model,segment); // Part eklemeyi runtime’da yapabilirsin
                 vehicles.add(vehicle);
             }
         }

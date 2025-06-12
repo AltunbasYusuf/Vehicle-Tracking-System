@@ -59,7 +59,7 @@ public class SellerDashboard {
         System.out.println("\nRegistered Vehicles:");
         for (int i = 0; i < vehicles.size(); i++) {
             Vehicle v = vehicles.get(i);
-            System.out.println((i + 1) + ". " + v.getVehicleType() + " - " + v.getBrand() + " " + v.getModel());
+            System.out.println((i + 1)+" - " + v.getBrand() + " " + v.getModel()+" "+ v.getVehicleSegment());
         }
     }
 }

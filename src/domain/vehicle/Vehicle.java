@@ -8,26 +8,24 @@ import java.util.List;
 
 public class Vehicle {
 
-    private String vehicleType;
     private List<VehiclePart> parts;
     private String brand;
     private String model;
+    private String segment;
+    private String fueltype;
+    private double HP;
 
 
 
-    public Vehicle(String vehicleType, String brand, String model){
-        this.vehicleType=vehicleType;
+    public Vehicle(String brand, String model, String segment){
         this.parts = new ArrayList<>();
         this.brand=brand;
         this.model=model;
+        this.segment=segment;
     }
 
     public void addPart(VehiclePart part) {
         this.parts.add(part);
-    }
-
-    public String getVehicleType() {
-        return vehicleType;
     }
 
     public List<VehiclePart> getParts() {
@@ -42,5 +40,19 @@ public class Vehicle {
         return model;
     }
 
+    public String getVehicleSegment(){return this.segment;}
+
+    public void setFuelType(String fueltype){
+        this.fueltype=fueltype;
+    }
+
+    public String getFueltype(){return this.fueltype; }
+
+
+    public void setHP(double HP){
+        this.HP=HP;
+    }
+
+    public double getHP(){return this.HP; }
 
 }

@@ -91,7 +91,7 @@ public class AuthManager implements AuthInterface{
             System.out.println("\nPlease select your vehicle from the list:");
             for (int i = 0; i < allVehicles.size(); i++) {
                 domain.vehicle.Vehicle v = allVehicles.get(i);
-                System.out.println((i + 1) + ". " + v.getVehicleType() + " - " + v.getBrand() + " " + v.getModel());
+                System.out.println((i + 1) + ". " + "Car" + " - " + v.getBrand() + " " + v.getModel() + " " + v.getVehicleSegment());
             }
 
             System.out.print("Your choice: ");

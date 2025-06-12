@@ -12,8 +12,8 @@ public class Quick_Setup {
     private static final Scanner input = new Scanner(System.in);
 
     public static Vehicle quickSetup() {
-        System.out.println("Welcome to Quick Setup! Please choose the vehicle:\n1. Car\n2. Motorcycle\n3. Truck");
-        String vehicleType = VehicleType();
+        System.out.println("Welcome to Quick Setup! Please introduce your vehicle to the program with quick setup.");
+
 
         List<VehiclePart> parts = new ArrayList<>();
 
@@ -21,11 +21,12 @@ public class Quick_Setup {
         String brand = input.nextLine();
         System.out.print("Enter vehicle model: ");
         String model = input.nextLine();
-
+        System.out.println("Enter vehicle segment (HATCHBACK, SEDAN, SUV, PICKUP, VAN)");
+        String segment =VehicleSegment();
 
         // 1. Motor
-        System.out.println("Enter motor type (diesel, electric, hybrid):");
-        String motorType = input.nextLine();
+        System.out.println("Enter motor type (gasoline, diesel, electric):");
+        String motorType = motorType();
         System.out.println("Enter horsepower:");
         double horsePower = Double.parseDouble(input.nextLine());
         System.out.println("Enter fuel consumption (L/100km or kWh/100km):");
@@ -94,11 +95,13 @@ public class Quick_Setup {
         parts.add(cooling);
 
         // Vehicle oluştur
-        Vehicle vehicle = new Vehicle(vehicleType,brand,model);
+        Vehicle vehicle = new Vehicle(brand,model,segment);
         for (VehiclePart part : parts) { // oluşturlan parçalar burada eklenir.
             vehicle.addPart(part);
         }
 
+        vehicle.setFuelType(motorType);
+        vehicle.setHP(horsePower);
         SellerVehicleRepositoryInterface repo = new TxtVehicleRepository("seller_vehicle_system.txt");
         VehicleService service = new VehicleService(repo);
         System.out.println("Quick setup complete. Vehicle and parts initialized.");
@@ -111,15 +114,45 @@ public class Quick_Setup {
 
     }
 
-    public static String VehicleType() {
-        String vehicleType = input.nextLine();
-        if (vehicleType.equalsIgnoreCase("car") || vehicleType.equals("1")) {
-            return "Car";
-        } else if (vehicleType.equalsIgnoreCase("motorcycle") || vehicleType.equals("2")) {
-            return "Motorcycle";
-        } else if (vehicleType.equalsIgnoreCase("truck") || vehicleType.equals("3")) {
-            return "Truck";
+
+
+    public static String VehicleSegment(){
+        String vehicleSegment= input.nextLine();
+        if (vehicleSegment.equalsIgnoreCase("suv")){
+            return "SUV";
         }
-        return "Unknown";
+        else if (vehicleSegment.equalsIgnoreCase("sedan")){
+            return "SEDAN";
+        }
+        else if (vehicleSegment.equalsIgnoreCase("hatchback")){
+            return "HATCHBACK";
+        }
+        else if (vehicleSegment.equalsIgnoreCase("pickup")||vehicleSegment.equalsIgnoreCase("PICKUP")){
+            return "PICKUP";
+        }
+        else if (vehicleSegment.equalsIgnoreCase("van")){
+            return "VAN";
+        }
+        else {
+            System.out.println("Undefined segment, please specify an existing segment (SUV,SEDAN,HATCHBACK,PICKUP,VAN)");
+            return VehicleSegment();
+        }
+    }
+
+    public static String motorType(){
+        String motorType= input.nextLine();
+        if (motorType.equalsIgnoreCase("gasoline")||motorType.equalsIgnoreCase("gasolıne")){
+            return "gasoline";
+        }
+        else if (motorType.equalsIgnoreCase("diesel")||motorType.equalsIgnoreCase("dıesel")){
+            return "diesel";
+        }
+        else if (motorType.equalsIgnoreCase("electric")||motorType.equalsIgnoreCase("electrıc")){
+            return "electric";
+        }
+        else{
+            System.out.println("Undefined motor type, please specify an existing motor type (gasoline,dieseş,electric");
+        return motorType();
+        }
     }
 }
