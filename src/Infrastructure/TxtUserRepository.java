@@ -64,11 +64,14 @@ public class TxtUserRepository implements UserRepositoryInterface {
                 String[] parts = line.split(",");
                 if (parts.length < 5) continue;
 
-                if (parts[0].equalsIgnoreCase(mail)) {
+                String mailNow = parts[0].replaceAll("\\uFEFF", "").trim().toLowerCase();
+                String mailReal = mail.toLowerCase();
+
+                if (mailNow.equals(mailReal)) {
                     String hashedPassword = parts[1];
-                    String name = parts[2];
-                    String surname = parts[3];
-                    String role = parts[4];
+                    String name = parts[3];
+                    String surname = parts[4];
+                    String role = parts[2];
 
                     if (role.equalsIgnoreCase("vehicle_seller")) {
                         return new VehicleSeller(mail, hashedPassword, name, surname);
