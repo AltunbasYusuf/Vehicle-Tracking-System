@@ -50,4 +50,13 @@ public class Location {
 
         return EARTH_RADIUS_KM * c;
     }
+
+    //bu fonksiyon iki location arası ortalama bir hızla gidildiğinde ne kadar zaman alacağını hesaplar.
+    public long estimatedTravelTimeTo(Location other, double averageSpeedKmph) {
+        double distance = this.distanceTo(other); // km cinsinden
+        double hours = distance / averageSpeedKmph;
+        return Math.round(hours * 60); // dakikaya çevir
+    }
+
+
 }

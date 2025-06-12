@@ -2,6 +2,8 @@ package Infrastructure;
 
 import application.repository.UserRepositoryInterface;
 import domain.user.User;
+import domain.user.VehicleOwner;
+import domain.user.VehicleSeller;
 
 import java.io.*;
 
@@ -18,8 +20,8 @@ public class TxtUserRepository implements UserRepositoryInterface {
     public void save(User user) throws IOException {
 
         String email=user.getMail();
-        String password = user.getPassword(); // signUp() metodunda şifreyi user'a hashleyip ekliyoruz.
-        String role = user.getRole();
+        String password = user.getHashedPassword(); // signUp() metodunda şifreyi user'a hashleyip ekliyoruz.
+        String role = user.getRole().name().toLowerCase(); // role'ü dosyaya yazma.
         String name= user.getName();
         String surname = user.getSurname();
 
@@ -68,10 +70,10 @@ public class TxtUserRepository implements UserRepositoryInterface {
                     String surname = parts[3];
                     String role = parts[4];
 
-                    if (role.equalsIgnoreCase("driver")) {
-                        return new DriverUser(mail, hashedPassword, name, surname);
+                    if (role.equalsIgnoreCase("vehicle_seller")) {
+                        return new VehicleSeller(mail, hashedPassword, name, surname);
                     } else if (role.equalsIgnoreCase("vehicle_owner")) {
-                        return new VehicleOwnerUser(mail, hashedPassword, name, surname);
+                        return new VehicleOwner(mail, hashedPassword, name, surname);
                     }
                 }
             }

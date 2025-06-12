@@ -15,6 +15,7 @@ public abstract class User {
     protected UserRole role;
     protected Vehicle  vehicle;
 
+
     public enum UserRole {
         VEHICLE_OWNER,
         VEHICLE_SELLER
@@ -30,6 +31,10 @@ public abstract class User {
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public String getMail() {

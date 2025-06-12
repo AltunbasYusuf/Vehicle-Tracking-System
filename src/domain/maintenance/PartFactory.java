@@ -11,8 +11,7 @@ public class PartFactory {
                 return new Motor(
                         (String) parameters.get("motorType"),
                         (double) parameters.get("horsePower"),
-                        (double) parameters.get("fuelConsumption"),
-                        (double) parameters.get("co2Emission")
+                        (double) parameters.get("fuelConsumption")
                 );
 
             case "tire":

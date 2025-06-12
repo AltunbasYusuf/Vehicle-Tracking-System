@@ -1,8 +1,11 @@
+import domain.vehicle.Vehicle;
+import presentation.FirstMenu;
+import presentation.setup.Quick_Setup;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        //Main sadece diğer classları yönetmek için olacak Single responsibility principles için
-    Quick_Setup qs =new Quick_Setup();
-    Vehicle vehicle=qs.quickSetup();
+    public static void main(String[] args) throws IOException {
+        FirstMenu.start();
     }
 }

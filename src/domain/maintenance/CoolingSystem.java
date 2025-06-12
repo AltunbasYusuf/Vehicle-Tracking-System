@@ -10,6 +10,9 @@ public class CoolingSystem extends VehiclePart {
         super("Cooling System");
         this.antifreezeLevel = antifreezeLevel;
         this.minLevel = minLevel;
+
+        maintenanceDescriptions.add("Antifreeze level check");
+        maintenanceDescriptions.add("Radiator cleaning");
     }
 
     @Override

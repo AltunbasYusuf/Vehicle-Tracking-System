@@ -1,3 +1,8 @@
+package presentation.setup;
+
+import Infrastructure.TxtVehicleRepository;
+import application.repository.SellerVehicleRepositoryInterface;
+import application.service.VehicleService;
 import domain.maintenance.*;
 import domain.vehicle.Vehicle;
 
@@ -6,11 +11,17 @@ import java.util.*;
 public class Quick_Setup {
     private static final Scanner input = new Scanner(System.in);
 
-    public static void quickSetup() {
+    public static Vehicle quickSetup() {
         System.out.println("Welcome to Quick Setup! Please choose the vehicle:\n1. Car\n2. Motorcycle\n3. Truck");
         String vehicleType = VehicleType();
 
         List<VehiclePart> parts = new ArrayList<>();
+
+        System.out.print("Enter vehicle brand: ");
+        String brand = input.nextLine();
+        System.out.print("Enter vehicle model: ");
+        String model = input.nextLine();
+
 
         // 1. Motor
         System.out.println("Enter motor type (diesel, electric, hybrid):");
@@ -83,13 +94,21 @@ public class Quick_Setup {
         parts.add(cooling);
 
         // Vehicle oluştur
-        Vehicle vehicle = new Vehicle(vehicleType, parts);
+        Vehicle vehicle = new Vehicle(vehicleType,brand,model);
+        for (VehiclePart part : parts) { // oluşturlan parçalar burada eklenir.
+            vehicle.addPart(part);
+        }
+
+        SellerVehicleRepositoryInterface repo = new TxtVehicleRepository("seller_vehicle_system.txt");
+        VehicleService service = new VehicleService(repo);
         System.out.println("Quick setup complete. Vehicle and parts initialized.");
 
-        // Opsiyonel: Parçaları ekrana bas
-        for (VehiclePart part : vehicle.getParts()) {
-            System.out.println("- " + part.getPartType() + " (Bakım tarihi: " + part.getNextMaintenanceDate() + ")");
-        }
+        //!!!! sellerin şu özellikli şu isimli şu aracım var dediği ve kaydettiği txt dosyassı.
+        service.addVehicle(vehicle);
+        System.out.println("Vehicle has been registered to the system.");
+
+        return vehicle;
+
     }
 
     public static String VehicleType() {

@@ -2,7 +2,7 @@ package domain.vehicle;
 
 public class EmissionCalculator {
 
-    private double emisionFactor;
+    private double emissionFactor;
     private double fuelConsumption;
     private Vehicle vehicle;
 

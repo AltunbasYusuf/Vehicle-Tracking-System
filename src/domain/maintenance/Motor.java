@@ -1,5 +1,7 @@
 package domain.maintenance;
 
+import domain.vehicle.Vehicle;
+
 import java.time.LocalDate;
 
 public class Motor extends VehiclePart {
@@ -9,12 +11,15 @@ public class Motor extends VehiclePart {
     private double fuelConsumption;
     private double co2Emission;
 
-    public Motor(String motorType, double horsePower, double fuelConsumption, double co2Emission) {
+    public Motor(String motorType, double horsePower, double fuelConsumption) {
         super("Motor");
         this.motorType = motorType;
         this.horsePower = horsePower;
         this.fuelConsumption = fuelConsumption;
-        this.co2Emission = co2Emission;
+
+        maintenanceDescriptions.add("Oil change");
+        maintenanceDescriptions.add("Filter cleaning");
+        maintenanceDescriptions.add("Engine check");
     }
 
     @Override
@@ -42,5 +47,15 @@ public class Motor extends VehiclePart {
     public int getDefaultMaintenanceInterval() {
         return 12;
     }
+
+    private static double calculateEmission(double distanceKm, Vehicle vehicle) {
+        for (VehiclePart part : vehicle.getParts()) {
+            if (part instanceof Motor motor) {
+                return distanceKm * motor.getCo2Emission(); // g/km * km = gram
+            }
+        }
+        return 0;
+    }
+
 
 }

@@ -8,6 +8,9 @@ public class Brake extends VehiclePart {
         super("Brake System");
         this.padWearLevel = padWearLevel;
         this.absEnabled = absEnabled;
+
+        maintenanceDescriptions.add("Brake pad replacement");
+        maintenanceDescriptions.add("ABS inspection");
     }
 
     @Override

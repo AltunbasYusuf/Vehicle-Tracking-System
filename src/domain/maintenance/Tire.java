@@ -10,6 +10,9 @@ public class Tire extends VehiclePart {
         super("Tire");
         this.seasonType = seasonType;
         this.treadDepth = treadDepth;
+
+        maintenanceDescriptions.add("Tread depth check");
+        maintenanceDescriptions.add("Tire rotation");
     }
 
     @Override

@@ -1,12 +1,19 @@
 package application;
 
+import Infrastructure.TxtUserVehicleRepository;
+import Infrastructure.TxtVehicleRepository;
+import application.repository.SellerVehicleRepositoryInterface;
 import application.repository.UserRepositoryInterface;
+import application.repository.UserVehicleRepositoryInterface;
 import application.security.PasswordEncoderInterface;
 import domain.user.User;
 import domain.user.VehicleOwner;
 import domain.user.VehicleSeller;
+import domain.vehicle.Vehicle;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
 
 import static domain.user.User.UserRole.VEHICLE_OWNER;
 import static domain.user.User.UserRole.VEHICLE_SELLER;
@@ -40,7 +47,6 @@ public class AuthManager implements AuthInterface{
             System.out.println("This email is already registered.");
             return false;
         }
-
         if (rawPassword.length() < 6) {
             System.out.println("Password must be at least 6 characters.");
             return false;
@@ -71,7 +77,36 @@ public class AuthManager implements AuthInterface{
 
         userRepository.save(user);
         System.out.println("Sign up successful.");
+
+        if (userRole == VEHICLE_OWNER) {
+            SellerVehicleRepositoryInterface vehicleRepo = new TxtVehicleRepository("vehicle_system.txt");
+            UserVehicleRepositoryInterface userVehicleRepo = new TxtUserVehicleRepository("user_vehicle.txt", vehicleRepo);
+
+            List<Vehicle> allVehicles = vehicleRepo.loadAllVehicles();
+            if (allVehicles.isEmpty()) {
+                System.out.println("❗ No vehicles available in the system. Contact a seller.");
+                return false;
+            }
+
+            System.out.println("\nPlease select your vehicle from the list:");
+            for (int i = 0; i < allVehicles.size(); i++) {
+                domain.vehicle.Vehicle v = allVehicles.get(i);
+                System.out.println((i + 1) + ". " + v.getVehicleType() + " - " + v.getBrand() + " " + v.getModel());
+            }
+
+            System.out.print("Your choice: ");
+            Scanner input = new Scanner(System.in);
+            int index = Integer.parseInt(input.nextLine()) - 1;
+
+            if (index < 0 || index >= allVehicles.size()) {
+                System.out.println("❗ Invalid vehicle selection.");
+                return false;
+            }
+
+            Vehicle selected = allVehicles.get(index);
+            userVehicleRepo.assignVehicleToUser(mail, selected);
+            System.out.println("✅ Vehicle assigned successfully.");
+        }
         return true;
     }
-
 }
