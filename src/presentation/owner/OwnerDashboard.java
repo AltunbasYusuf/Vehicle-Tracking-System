@@ -262,11 +262,9 @@ public class OwnerDashboard {
             double co2 = emissionService.calculateEmission(trip.getDistance(), user.getVehicle(), user.getVehicle().getFuelConsumption());
             double cost = emissionService.fuelCost(user.getVehicle(),trip.getDistance());
             if (!user.getVehicle().getFueltype().equalsIgnoreCase("electric")) {
-                ElectricVehicle closeElectric;
-                closeElectric = ElectricVehicleSuggestionService.copyCloseElectricVehicle(user.getVehicle());
-                double electricCost = 0.20 * closeElectric.getFuelConsumption() * trip.getDistance() / 100;
+                double electricCost = ElectricVehicleSuggestionService.calculateCloseElectricCost(user.getVehicle(),trip.getDistance());
                 totalCostElectric += electricCost;
-                double electricCo2= 0.45* closeElectric.getFuelConsumption() * trip.getDistance() / 100;
+                double electricCo2= ElectricVehicleSuggestionService.calculateCloseElectricCO2(user.getVehicle(),trip.getDistance());
                 totalCo2Electric+=electricCo2;
             }
             totalCo2+=co2;

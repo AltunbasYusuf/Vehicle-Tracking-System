@@ -1,2 +1,5 @@
 ﻿satici@gmail.com,HASH81269321icitas,vehıcle_seller,satici,kisisi
 yusuf@gmail.com,HASH70628321fusuy,vehıcle_owner,yusuf,altunbas
+yaren@gmail.com,HASH68218321neray,vehıcle_owner,yaren,sahin
+yusuf2@gmail.com,HASH70628321fusuy,vehıcle_owner,yusuf2,altunbas
+yusuf3@gmail.com,HASH70628321fusuy,vehıcle_owner,yusuf,altunbas

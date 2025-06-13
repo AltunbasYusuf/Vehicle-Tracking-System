@@ -1,2 +1,5 @@
 
 Toyota,Corolla,SEDAN,gasoline,120.0,6.0
+Tesla,X,SEDAN,electric,100.0,5.0
+Fiat,Doblo,VAN,diesel,120.0,5.5
+Renault,Clio ECO LPG,HATCHBACK,LPG,100.0,6.1

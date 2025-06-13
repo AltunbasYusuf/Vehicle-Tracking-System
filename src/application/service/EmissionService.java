@@ -6,7 +6,7 @@ import domain.vehicle.Vehicle;
 
 public class EmissionService {
 
-    public double calculateEmission(double distanceKm, Vehicle vehicle, double fuelConsumptionPer100Km) {
+    public static double calculateEmission(double distanceKm, Vehicle vehicle, double fuelConsumptionPer100Km) {
         double emmisionFactor = 0;
         if(vehicle.getFueltype().equalsIgnoreCase("electric")){
             emmisionFactor=0.45;
@@ -23,7 +23,7 @@ public class EmissionService {
         return distanceKm*emmisionFactor*fuelConsumptionPer100Km/100;
     }
 
-    public double fuelCost(Vehicle vehicle, double distance){
+    public static double fuelCost(Vehicle vehicle, double distance){
         double cost = 0;
         if(vehicle.getFueltype().equalsIgnoreCase("electric")){
             cost=0.20;
