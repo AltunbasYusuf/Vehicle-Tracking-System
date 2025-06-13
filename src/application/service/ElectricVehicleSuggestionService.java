@@ -8,6 +8,7 @@ import java.util.List;
 public class ElectricVehicleSuggestionService {
     static ElectricVehicleFileRepository repo = new ElectricVehicleFileRepository();
     static List<ElectricVehicle> electricVehicles = repo.loadElectricVehicles();
+
     public static void electricVehicleSuggestion(Vehicle vehicle){
         if (vehicle.getFueltype().equalsIgnoreCase("electric")){
             System.out.println("Thanks for using electric vehicles and protect nature! ");

@@ -6,6 +6,7 @@ import application.repository.TripRepositoryInterface;
 import application.service.EmissionService;
 import application.service.NotificationService;
 import application.service.TripService;
+import application.service.ElectricVehicleSuggestionService;
 import domain.location.Location;
 import domain.maintenance.MaintenanceRecord;
 import domain.maintenance.VehiclePart;
@@ -33,6 +34,7 @@ public class OwnerDashboard {
             System.out.println("3. Show maintenance history");
             System.out.println("4. Add trip");
             System.out.println("5. Show trip history");
+            System.out.println("6. Suggest an electric car similar to my car");
             System.out.println("0. Exit");
             System.out.print("Your Choice: ");
             String choice = input.nextLine();
@@ -51,9 +53,12 @@ public class OwnerDashboard {
                     addTrip(user);
                     break;
                 case "5":
-                    showTripHistory();
+                    showTripHistory(user);
                     break;
-                case "0":
+                case "6":
+                    ElectricVehicleSuggestionService.electricVehicleSuggestion(vehicle);
+                    break;
+                    case "0":
                     return;
                 default:
                     System.out.println("❗ Invalid choice.");
@@ -222,13 +227,13 @@ public class OwnerDashboard {
         if(is_valid){ //dosyaya kaydet
 
             EmissionService emissionService = new EmissionService();
-            double co2 = emissionService.calculateEmission(trip.getDistance(), user.getVehicle());
+            double co2 = emissionService.calculateEmission(trip.getDistance(), user.getVehicle(),user.getVehicle().getFuelConsumption());
             System.out.println("Estimated Emission: " + co2 + " grams of CO₂");
             tripService.saveTrip(trip);
         }
     }
 
-    static void showTripHistory(){
+    static void showTripHistory(User user){
 
         TripRepositoryInterface repo = new TxtTripRepository("trip.txt");
         TripService tripService = new TripService(repo);
@@ -241,17 +246,23 @@ public class OwnerDashboard {
             return;
         }
         System.out.println("\n Trip History:");
+        double totalCo2=0;
         for (Trip trip : trips) {
             String start = trip.getStart().toString();
             String end = trip.getEnd().toString();
             double distance = trip.getDistance();
             String desc = trip.getDescription() != null ? trip.getDescription() : "No description"; // nullsa no descript yaz değilse descripti yazdır.
+            EmissionService emissionService = new EmissionService();
+            double co2 = emissionService.calculateEmission(trip.getDistance(), user.getVehicle(), user.getVehicle().getFuelConsumption());
+            totalCo2+=co2;
 
             System.out.println(desc);
             System.out.println("    ➥ Start: " + start);
             System.out.println("    ➥ End:   " + end);
-            System.out.println("    ➥ Distance: " + distance + " km\n");
+            System.out.println("    ➥ Distance: " + distance + " km");
+            System.out.println("    ➥ CO2 Released:" + co2 + " kg\n");
         }
 
+           System.out.println("Total CO2 released: "+totalCo2 +"kg");
     }
 }

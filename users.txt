@@ -1,2 +1,2 @@
-﻿yaren,HASH366877654321,vehicle_seller,yaren,sahin
-yusuf123@gmail.com,HASH70628321fusuy,vehıcle_owner,yusuf,altunbas
+﻿satici@gmail.com,HASH81269321icitas,vehıcle_seller,satici,kisisi
+yusuf@gmail.com,HASH70628321fusuy,vehıcle_owner,yusuf,altunbas

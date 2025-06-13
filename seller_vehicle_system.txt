@@ -1,2 +1,1 @@
-
 Toyota,Corolla,SEDAN,gasoline,120.0,6.0

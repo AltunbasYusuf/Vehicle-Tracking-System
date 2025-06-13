@@ -102,6 +102,7 @@ public class Quick_Setup {
 
         vehicle.setFuelType(motorType);
         vehicle.setHP(horsePower);
+        vehicle.setFuelConsumption(fuelConsumption);
         SellerVehicleRepositoryInterface repo = new TxtVehicleRepository("seller_vehicle_system.txt");
         VehicleService service = new VehicleService(repo);
         System.out.println("Quick setup complete. Vehicle and parts initialized.");

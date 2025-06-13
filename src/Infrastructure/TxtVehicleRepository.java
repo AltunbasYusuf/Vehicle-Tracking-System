@@ -18,7 +18,7 @@ public class TxtVehicleRepository implements SellerVehicleRepositoryInterface {
     @Override
     public void saveVehicle(Vehicle vehicle) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write( vehicle.getBrand() + "," + vehicle.getModel()+ "," + vehicle.getVehicleSegment());
+            writer.write( vehicle.getBrand() + "," + vehicle.getModel()+ "," + vehicle.getVehicleSegment()+","+ vehicle.getFueltype() + "," + vehicle.getHP() + "," + vehicle.getFuelConsumption());
             writer.newLine();
         }
     }
@@ -32,14 +32,19 @@ public class TxtVehicleRepository implements SellerVehicleRepositoryInterface {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length != 3) continue;
+                if (parts.length != 6) continue;
 
-                String type = parts[0];
-                String brand = parts[1];
-                String model = parts[2];
-                String segment = parts[3];
+                String brand = parts[0];
+                String model = parts[1];
+                String segment = parts[2];
+                String fuelType=parts[3];
+                double HP = Double.parseDouble(parts[4].trim());
+                double fuelConsumption = Double.parseDouble(parts[5].trim());
 
                 Vehicle vehicle = new Vehicle(brand, model,segment); // Part eklemeyi runtime’da yapabilirsin
+                vehicle.setFuelType(fuelType);
+                vehicle.setHP(HP);
+                vehicle.setFuelConsumption(fuelConsumption);
                 vehicles.add(vehicle);
             }
         }

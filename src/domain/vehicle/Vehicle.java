@@ -14,6 +14,7 @@ public class Vehicle {
     private String segment;
     private String fueltype;
     private double HP;
+    private double fuelConsumption;
 
 
 
@@ -48,11 +49,17 @@ public class Vehicle {
 
     public String getFueltype(){return this.fueltype; }
 
-
     public void setHP(double HP){
         this.HP=HP;
     }
 
     public double getHP(){return this.HP; }
+
+    public void setFuelConsumption(double fuelConsumption){
+        this.fuelConsumption=fuelConsumption;
+    }
+
+    public double getFuelConsumption(){return this.fuelConsumption; }
+
 
 }

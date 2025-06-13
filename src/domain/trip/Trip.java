@@ -62,6 +62,9 @@ public class Trip {
         if (startLocation == null || endLocation == null) return 0;
         return startLocation.distanceTo(endLocation);
     }
+    public void setCo2(double co2){this.CO2emission=co2;}
+
+    public double getCo2(){return this.CO2emission;}
 
     public String getDescription() {
         return description;
