@@ -17,13 +17,15 @@ public class ElectricVehicleFileRepository {
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length != 3) continue;
+                if (parts.length != 4) continue;
 
                 String model = parts[0].trim();
                 String segment = parts[1].trim().toUpperCase();
                 int hp = Integer.parseInt(parts[2].trim().split(" ")[0]);
+                double fuelConsumption = Double.parseDouble(parts[3].trim().split(" ")[0]);
 
-                vehicles.add(new ElectricVehicle(model, segment, hp));
+
+                vehicles.add(new ElectricVehicle(model, segment, hp, fuelConsumption));
             }
 
         } catch (IOException e) {

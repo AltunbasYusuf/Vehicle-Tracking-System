@@ -12,6 +12,7 @@ import domain.maintenance.MaintenanceRecord;
 import domain.maintenance.VehiclePart;
 import domain.trip.Trip;
 import domain.user.User;
+import domain.vehicle.ElectricVehicle;
 import domain.vehicle.Vehicle;
 
 import java.io.IOException;
@@ -228,7 +229,9 @@ public class OwnerDashboard {
 
             EmissionService emissionService = new EmissionService();
             double co2 = emissionService.calculateEmission(trip.getDistance(), user.getVehicle(),user.getVehicle().getFuelConsumption());
-            System.out.println("Estimated Emission: " + co2 + " grams of CO₂");
+            double cost= emissionService.fuelCost(user.getVehicle(),trip.getDistance());
+            System.out.printf("Estimated Emission: %.2f KG of CO₂",co2);
+            System.out.printf("Fuel cost of this trip: %.2f USD",cost);
             tripService.saveTrip(trip);
         }
     }
@@ -247,6 +250,9 @@ public class OwnerDashboard {
         }
         System.out.println("\n Trip History:");
         double totalCo2=0;
+        double totalCost=0;
+        double totalCostElectric=0;
+        double totalCo2Electric=0;
         for (Trip trip : trips) {
             String start = trip.getStart().toString();
             String end = trip.getEnd().toString();
@@ -254,15 +260,33 @@ public class OwnerDashboard {
             String desc = trip.getDescription() != null ? trip.getDescription() : "No description"; // nullsa no descript yaz değilse descripti yazdır.
             EmissionService emissionService = new EmissionService();
             double co2 = emissionService.calculateEmission(trip.getDistance(), user.getVehicle(), user.getVehicle().getFuelConsumption());
+            double cost = emissionService.fuelCost(user.getVehicle(),trip.getDistance());
+            if (!user.getVehicle().getFueltype().equalsIgnoreCase("electric")) {
+                ElectricVehicle closeElectric;
+                closeElectric = ElectricVehicleSuggestionService.copyCloseElectricVehicle(user.getVehicle());
+                double electricCost = 0.20 * closeElectric.getFuelConsumption() * trip.getDistance() / 100;
+                totalCostElectric += electricCost;
+                double electricCo2= 0.45* closeElectric.getFuelConsumption() * trip.getDistance() / 100;
+                totalCo2Electric+=electricCo2;
+            }
             totalCo2+=co2;
+            totalCost+=cost;
+
+
 
             System.out.println(desc);
             System.out.println("    ➥ Start: " + start);
             System.out.println("    ➥ End:   " + end);
-            System.out.println("    ➥ Distance: " + distance + " km");
-            System.out.println("    ➥ CO2 Released:" + co2 + " kg\n");
+            System.out.println("    ➥ Distance: " + distance + " KM");
+            System.out.printf("    ➥ CO2 Released: %.2f KG\n",co2);
         }
-
-           System.out.println("Total CO2 released: "+totalCo2 +"kg");
+           double costDifference=totalCost-totalCostElectric;
+           double co2Difference=totalCo2-totalCo2Electric;
+           System.out.printf("Total CO2 released: %.2f  KG\n",totalCo2);
+           System.out.printf("Total fuel cost: %.2f USD\n", totalCost);
+        if (!user.getVehicle().getFueltype().equalsIgnoreCase("electric")){
+            System.out.printf(
+                    "If you prefer our electric car suggestion you pay %.2f USD less and your car release %.2f KG CO2 less.\n", costDifference, co2Difference);
+           }
     }
 }

@@ -25,7 +25,7 @@ public class Quick_Setup {
         String segment =VehicleSegment();
 
         // 1. Motor
-        System.out.println("Enter motor type (gasoline, diesel, electric):");
+        System.out.println("Enter fuel type (gasoline, diesel, electric, LPG):");
         String motorType = motorType();
         System.out.println("Enter horsepower:");
         double horsePower = Double.parseDouble(input.nextLine());
@@ -151,8 +151,11 @@ public class Quick_Setup {
         else if (motorType.equalsIgnoreCase("electric")||motorType.equalsIgnoreCase("electrıc")){
             return "electric";
         }
+        else if (motorType.equalsIgnoreCase("lpg")){
+            return "LPG";
+        }
         else{
-            System.out.println("Undefined motor type, please specify an existing motor type (gasoline,dieseş,electric");
+            System.out.println("Undefined fuel type, please specify an existing fuel type (gasoline, dieseL, electric, LPG");
         return motorType();
         }
     }

@@ -4,11 +4,13 @@ public class ElectricVehicle {
     private String model;
     private String segment;
     private int horsepower;
+    private double fuelConsumption;
 
-    public ElectricVehicle(String model, String segment, int horsepower) {
+    public ElectricVehicle(String model, String segment, int horsepower, double fuelConsumption) {
         this.model = model;
         this.segment = segment;
         this.horsepower = horsepower;
+        this.fuelConsumption = fuelConsumption;
     }
 
     public String getModel() {
@@ -22,6 +24,8 @@ public class ElectricVehicle {
     public int getHorsepower() {
         return horsepower;
     }
+
+    public double getFuelConsumption() {return fuelConsumption;}
 
     @Override
     public String toString() {

@@ -22,4 +22,21 @@ public class EmissionService {
         }
         return distanceKm*emmisionFactor*fuelConsumptionPer100Km/100;
     }
+
+    public double fuelCost(Vehicle vehicle, double distance){
+        double cost = 0;
+        if(vehicle.getFueltype().equalsIgnoreCase("electric")){
+            cost=0.20;
+        }
+        if(vehicle.getFueltype().equalsIgnoreCase("gasoline")){
+            cost=1.25;
+        }
+        if(vehicle.getFueltype().equalsIgnoreCase("diesel")){
+            cost=1.15;
+        }
+        if(vehicle.getFueltype().equalsIgnoreCase("LPG")){
+            cost=0.65;
+        }
+        return cost*vehicle.getFuelConsumption()*distance/100;
+    }
 }

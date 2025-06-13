@@ -1,55 +1,55 @@
-Smart EQ fortwo, HATCHBACK, 81 HP
-Smart EQ forfour, HATCHBACK, 82 HP
-Volkswagen e-up!, HATCHBACK, 82 HP
-Škoda CITIGOe iV, HATCHBACK, 82 HP
-SEAT Mii Electric, HATCHBACK, 82 HP
-Renault Twingo Z.E., HATCHBACK, 82 HP
-Renault Zoe (R90), HATCHBACK, 92 HP
-Fiat 500e (24 kWh), HATCHBACK, 94 HP
-Honda e, HATCHBACK, 134 HP
-Mini Cooper SE, HATCHBACK, 135 HP
-Nissan Leaf, HATCHBACK, 147 HP
-BMW i3, HATCHBACK, 170 HP
-Chevrolet Bolt EV, HATCHBACK, 200 HP
-LDV eT60, PICKUP, 150 HP
-Foton Tunland EV, PICKUP, 163 HP
-Maxus T90 EV, PICKUP, 175 HP
-JMC Vigus EV, PICKUP, 190 HP
-Ford F-150 Lightning, PICKUP, 452 HP
-Chevrolet Silverado EV, PICKUP, 510 HP
-Rivian R1T, PICKUP, 533 HP
-Renault Fluence Z.E., SEDAN, 95 HP
-Hyundai Ioniq Electric, SEDAN, 118 HP
-BYD e5, SEDAN, 134 HP
-Chevrolet Bolt EUV, SEDAN, 150 HP
-BMW i4 eDrive35, SEDAN, 282 HP
-Tesla Model 3 Standard Range, SEDAN, 283 HP
-BYD Seal, SEDAN, 313 HP
-Hyundai Ioniq 6, SEDAN, 321 HP
-Peugeot e-2008, SUV, 136 HP
-Opel/Vauxhall Mokka-e, SUV, 136 HP
-DS 3 Crossback E-Tense, SUV, 136 HP
-Citroën ë-C4, SUV, 136 HP
-Hyundai Kona Electric (39 kWh), SUV, 136 HP
-MG ZS EV, SUV, 141 HP
-Mazda MX-30, SUV, 143 HP
-Nissan Ariya (63 kWh), SUV, 160 HP
-Hyundai Ioniq 5 RWD, SUV, 168 HP
-Kia Niro EV, SUV, 201 HP
-Volkswagen ID.4, SUV, 201 HP
-Toyota bZ4X, SUV, 201 HP
-Skoda Enyaq iV, SUV, 204 HP
-Kia EV6 Standard, SUV, 229 HP
-Ford Mustang Mach-E, SUV, 266 HP
-Tesla Model Y RWD, SUV, 295 HP
-Nissan e-NV200, VAN, 107 HP
-Volkswagen e-Transporter, VAN, 110 HP
-Mercedes-Benz eVito, VAN, 114 HP
-Mercedes-Benz eSprinter, VAN, 114 HP
-Maxus eDeliver 3, VAN, 120 HP
-Renault Master E-Tech, VAN, 120 HP
-Renault Kangoo Z.E., VAN, 121 HP
-Citroen e-Berlingo, VAN, 134 HP
-Peugeot e-Rifter, VAN, 134 HP
-Opel Combo-e Life, VAN, 134 HP
-Ford E-Transit, VAN, 266 HP
+Smart EQ fortwo, HATCHBACK, 81 HP, 16.5
+Smart EQ forfour, HATCHBACK, 82 HP, 17.0
+Volkswagen e-up!, HATCHBACK, 82 HP, 12.7
+Škoda CITIGOe iV, HATCHBACK, 82 HP, 12.8
+SEAT Mii Electric, HATCHBACK, 82 HP, 12.9
+Renault Twingo Z.E., HATCHBACK, 82 HP, 16.3
+Renault Zoe (R90), HATCHBACK, 92 HP, 17.2
+Fiat 500e (24 kWh), HATCHBACK, 94 HP, 13.9
+Honda e, HATCHBACK, 134 HP, 17.2
+Mini Cooper SE, HATCHBACK, 135 HP, 14.1
+Nissan Leaf, HATCHBACK, 147 HP, 16.6
+BMW i3, HATCHBACK, 170 HP, 13.1
+Chevrolet Bolt EV, HATCHBACK, 200 HP, 17.7
+LDV eT60, PICKUP, 150 HP, 24.0
+Foton Tunland EV, PICKUP, 163 HP, 24.5
+Maxus T90 EV, PICKUP, 175 HP, 25.0
+JMC Vigus EV, PICKUP, 190 HP, 25.2
+Ford F-150 Lightning, PICKUP, 452 HP, 25.4
+Chevrolet Silverado EV, PICKUP, 510 HP, 25.5
+Rivian R1T, PICKUP, 533 HP, 26.0
+Renault Fluence Z.E., SEDAN, 95 HP, 14.5
+Hyundai Ioniq Electric, SEDAN, 118 HP, 13.8
+BYD e5, SEDAN, 134 HP, 16.8
+Chevrolet Bolt EUV, SEDAN, 150 HP, 17.5
+BMW i4 eDrive35, SEDAN, 282 HP, 17.2
+Tesla Model 3 Standard Range, SEDAN, 283 HP, 14.5
+BYD Seal, SEDAN, 313 HP, 16.5
+Hyundai Ioniq 6, SEDAN, 321 HP, 14.9
+Peugeot e-2008, SUV, 136 HP, 12.6
+Opel/Vauxhall Mokka-e, SUV, 136 HP, 13.4
+DS 3 Crossback E-Tense, SUV, 136 HP, 14.2
+Citroën ë-C4, SUV, 136 HP, 14.0
+Hyundai Kona Electric (39 kWh), SUV, 136 HP, 14.7
+MG ZS EV, SUV, 141 HP, 16.0
+Mazda MX-30, SUV, 143 HP, 17.5
+Nissan Ariya (63 kWh), SUV, 160 HP, 17.8
+Hyundai Ioniq 5 RWD, SUV, 168 HP, 16.9
+Kia Niro EV, SUV, 201 HP, 15.6
+Volkswagen ID.4, SUV, 201 HP, 16.5
+Toyota bZ4X, SUV, 201 HP, 17.1
+Skoda Enyaq iV, SUV, 204 HP, 17.2
+Kia EV6 Standard, SUV, 229 HP, 17.5
+Ford Mustang Mach-E, SUV, 266 HP, 18.3
+Tesla Model Y RWD, SUV, 295 HP, 15.8
+Nissan e-NV200, VAN, 107 HP, 22.0
+Volkswagen e-Transporter, VAN, 110 HP, 23.2
+Mercedes-Benz eVito, VAN, 114 HP, 21.8
+Mercedes-Benz eSprinter, VAN, 114 HP, 24.0
+Maxus eDeliver 3, VAN, 120 HP, 20.5
+Renault Master E-Tech, VAN, 120 HP, 23.5
+Renault Kangoo Z.E., VAN, 121 HP, 18.0
+Citroen e-Berlingo, VAN, 134 HP, 19.0
+Peugeot e-Rifter, VAN, 134 HP, 19.2
+Opel Combo-e Life, VAN, 134 HP, 19.1
+Ford E-Transit, VAN, 266 HP, 26.5
