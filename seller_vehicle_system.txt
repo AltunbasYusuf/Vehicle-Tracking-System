@@ -1,4 +1,9 @@
-Toyota,Corolla,SEDAN,gasoline,120.0,6.0
-Tesla,X,SEDAN,electric,100.0,5.0
-Fiat,Doblo,VAN,diesel,120.0,5.5
-Renault,Clio ECO LPG,HATCHBACK,LPG,100.0,6.1
+
+deneme,deneme model,SEDAN,gasoline,100.0,12.0
+Parts:
+motor:horsePower=100.0;co2Emission=0.0;fuelConsumption=12.0;motorType=gasoline;
+tire:seasonType=summer;treadDepth=1.0;
+brake:absEnabled=true;padWearLevel=12.0;
+cooling_system:minLevel=10.0;antifreezeLevel=12.0;
+---
+

@@ -19,12 +19,11 @@ public class TxtTripRepository  implements TripRepositoryInterface {
 
 
     @Override
-    public void saveTrip(Trip trip) throws IOException {
-
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))){
-
+    public void saveTrip(String ownerEmail, Trip trip) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             StringBuilder line = new StringBuilder();
-            line.append(trip.getStart()).append(",")
+            line.append(ownerEmail).append(",") // ✅ email başta
+                    .append(trip.getStart()).append(",")
                     .append(trip.getEnd()).append(",")
                     .append(trip.getDistance()).append(",")
                     .append(trip.getDescription() != null ? trip.getDescription() : "null");
@@ -39,37 +38,36 @@ public class TxtTripRepository  implements TripRepositoryInterface {
 
             writer.write(line.toString());
             writer.newLine();
-
+        } catch (IOException e) {
+            System.out.println("❗ Error writing trip record.");
         }
-        catch (IOException e){
-            System.out.println("Something went wrong when writing to the Trip txt file!");
-        }
-
     }
 
+
     @Override
-    public List<Trip> loadAllTrips() throws IOException {
-
+    public List<Trip> loadTripsForUser(String ownerEmail) throws IOException {
         List<Trip> trips = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
+                if (parts.length < 5) continue;
 
-                if (parts.length < 4) continue;
+                String email = parts[0];
+                if (!email.equals(ownerEmail)) continue; // sadece bu kullanıcıya ait kayıtlar
 
-                LocalDateTime start = LocalDateTime.parse(parts[0]);
-                LocalDateTime end = LocalDateTime.parse(parts[1]);
-                double distance = Double.parseDouble(parts[2]);
-                String description = parts[3].equals("null") ? null : parts[3];
+                LocalDateTime start = LocalDateTime.parse(parts[1]);
+                LocalDateTime end = LocalDateTime.parse(parts[2]);
+                double distance = Double.parseDouble(parts[3]);
+                String description = parts[4].equals("null") ? null : parts[4];
 
-                if (parts.length >= 8) {
-                    double sLat = Double.parseDouble(parts[4]);
-                    double sLon = Double.parseDouble(parts[5]);
-                    double eLat = Double.parseDouble(parts[6]);
-                    double eLon = Double.parseDouble(parts[7]);
+                if (parts.length >= 9) {
+                    double sLat = Double.parseDouble(parts[5]);
+                    double sLon = Double.parseDouble(parts[6]);
+                    double eLat = Double.parseDouble(parts[7]);
+                    double eLon = Double.parseDouble(parts[8]);
 
                     Location startLoc = new Location(sLat, sLon);
                     Location endLoc = new Location(eLat, eLon);
@@ -80,10 +78,8 @@ public class TxtTripRepository  implements TripRepositoryInterface {
                 }
             }
         }
-        catch (IOException e){
-            System.out.println("Something went wrong when reading to the Trip txt file!");
-        }
 
         return trips;
     }
+
 }

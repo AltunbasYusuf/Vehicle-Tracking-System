@@ -3,6 +3,7 @@ package domain.maintenance;
 import domain.vehicle.Vehicle;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 public class Motor extends VehiclePart {
 
@@ -55,6 +56,16 @@ public class Motor extends VehiclePart {
             }
         }
         return 0;
+    }
+
+    @Override
+    public Map<String, Object> getProperties() {
+        Map<String, Object> map = new java.util.HashMap<>();
+        map.put("motorType", motorType);
+        map.put("horsePower", horsePower);
+        map.put("fuelConsumption", fuelConsumption);
+        map.put("co2Emission", co2Emission);
+        return map;
     }
 
 

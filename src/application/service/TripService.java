@@ -13,17 +13,19 @@ public class TripService { // bu class trip reposuna trip eklemek veya bütün t
         this.tripRepository = tripRepository;
     }
 
-    public void saveTrip(Trip trip) {
+    // ✅ Kullanıcı e-mail ile trip kaydı
+    public void saveTrip(String email, Trip trip) {
         try {
-            tripRepository.saveTrip(trip);
+            tripRepository.saveTrip(email, trip);
         } catch (IOException e) {
             System.out.println("❗ Trip could not be saved: " + e.getMessage());
         }
     }
 
-    public List<Trip> getAllTrips() {
+    // ✅ Belirli kullanıcıya ait tüm tripleri getir
+    public List<Trip> getAllTrips(String email) {
         try {
-            return tripRepository.loadAllTrips();
+            return tripRepository.loadTripsForUser(email);
         } catch (IOException e) {
             System.out.println("❗ Could not load trips: " + e.getMessage());
             return List.of();

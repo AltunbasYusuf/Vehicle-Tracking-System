@@ -41,7 +41,7 @@ public class TxtUserVehicleRepository implements UserVehicleRepositoryInterface 
                 String segment = parts[3];
                 String fuelType=parts[4];
                 double HP = Double.parseDouble(parts[5].trim());
-                double fuelConsumption = Double.parseDouble(parts[5].trim());
+                double fuelConsumption = Double.parseDouble(parts[5].trim()); //DİKKAT
 
 
                 for (Vehicle v : allVehicles) {

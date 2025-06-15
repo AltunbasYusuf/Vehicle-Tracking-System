@@ -1,6 +1,8 @@
 package domain.maintenance;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CoolingSystem extends VehiclePart {
     private double antifreezeLevel; // Litre
@@ -17,7 +19,7 @@ public class CoolingSystem extends VehiclePart {
 
     @Override
     public String getPartType() {
-        return "cooling_system";
+        return "Cooling System";
     }
 
     public boolean isAntifreezeLow() {
@@ -31,6 +33,14 @@ public class CoolingSystem extends VehiclePart {
     @Override
     public int getDefaultMaintenanceInterval() {
         return 10;
+    }
+
+    @Override
+    public Map<String, Object> getProperties() {
+        Map<String, Object> props = new HashMap<>();
+        props.put("antifreezeLevel", antifreezeLevel);
+        props.put("minLevel", minLevel);
+        return props;
     }
 
 }

@@ -1,6 +1,8 @@
 package domain.maintenance;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tire extends VehiclePart {
     private String seasonType; // "summer", "winter"
@@ -31,6 +33,14 @@ public class Tire extends VehiclePart {
     @Override
     public int getDefaultMaintenanceInterval() {
         return 6;
+    }
+
+    @Override
+    public Map<String, Object> getProperties() {
+        Map<String, Object> props = new HashMap<>();
+        props.put("seasonType", seasonType);
+        props.put("treadDepth", treadDepth);
+        return props;
     }
 
 }

@@ -17,6 +17,7 @@ public abstract class VehiclePart {
     static MaintenanceRepositoryInterface repo = new TxtMaintenanceRepository("maintenance.txt"); // bu parçanın eski maintenance geçmişini tutar.
    protected List<String> maintenanceDescriptions = new ArrayList<>(); // her vehicle partın kendine özel bir bakım açıklaması olabilir.
 
+
     public VehiclePart(String name) {
         this.name = name;
         this.nextMaintenanceDate = LocalDate.now().plusMonths(getDefaultMaintenanceInterval());
@@ -51,24 +52,27 @@ public abstract class VehiclePart {
         }
     }
 
-    public void addMaintenanceRecord(MaintenanceRecord record) throws IOException {
-
-
-        repo.addRecord(this.name,record);// yeni recordu liste ekliyoruz.
-        this.nextMaintenanceDate = record.getNextSuggestedMaintenanceDate(); // yeni bakım tarihini güncelliyoruz.
+    public void addMaintenanceRecord(String ownerEmail, MaintenanceRecord record) throws IOException {
+        repo.addRecord(ownerEmail, this.name, record); // ✅ email + partName + record
+        this.nextMaintenanceDate = record.getNextSuggestedMaintenanceDate(); // ✅ bakım tarihini güncelle
     }
+
 
     public List<String> getMaintenanceDescriptions() {
         return maintenanceDescriptions;
     }
 
-    public List<MaintenanceRecord> getMaintenanceHistory() {
+    public List<MaintenanceRecord> getMaintenanceHistory(String ownerEmail) {
         try {
-            return repo.getRecords(this.getPartType());
+            return repo.getRecords(ownerEmail, this.getPartType());
         } catch (IOException e) {
             System.out.println("❗ Failed to read maintenance history from file: " + e.getMessage());
             return new ArrayList<>();
         }
     }
+
+
+    public abstract Map<String, Object> getProperties();
+
 
 }

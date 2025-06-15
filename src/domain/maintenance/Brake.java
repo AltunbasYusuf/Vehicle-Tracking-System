@@ -1,5 +1,8 @@
 package domain.maintenance;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Brake extends VehiclePart {
     private double padWearLevel; // % cinsinden
     private boolean absEnabled;
@@ -15,7 +18,7 @@ public class Brake extends VehiclePart {
 
     @Override
     public String getPartType() {
-        return "brake";
+        return "Brake System";
     }
 
     public double getPadWearLevel() {
@@ -29,5 +32,14 @@ public class Brake extends VehiclePart {
     @Override
     public int getDefaultMaintenanceInterval() {
         return 8;
+    }
+
+
+    @Override
+    public Map<String, Object> getProperties() {
+        Map<String, Object> props = new HashMap<>();
+        props.put("padWearLevel", padWearLevel);
+        props.put("absEnabled", absEnabled);
+        return props;
     }
 }

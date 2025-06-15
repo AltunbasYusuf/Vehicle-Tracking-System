@@ -79,7 +79,7 @@ public class AuthManager implements AuthInterface{
         System.out.println("Sign up successful.");
 
         if (userRole == VEHICLE_OWNER) {
-            SellerVehicleRepositoryInterface vehicleRepo = new TxtVehicleRepository("vehicle.txt");
+            SellerVehicleRepositoryInterface vehicleRepo = new TxtVehicleRepository("seller_vehicle_system.txt");
             UserVehicleRepositoryInterface userVehicleRepo = new TxtUserVehicleRepository("user_vehicle.txt", vehicleRepo);
 
             List<Vehicle> allVehicles = vehicleRepo.loadAllVehicles();

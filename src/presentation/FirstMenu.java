@@ -68,7 +68,7 @@ public class FirstMenu {
             // user.setVehicle(...) çağrısı burada yapılmalı,!!!!
 
             try {
-                SellerVehicleRepositoryInterface vehicleRepo = new TxtVehicleRepository("vehicle.txt");
+                SellerVehicleRepositoryInterface vehicleRepo = new TxtVehicleRepository("seller_vehicle_system.txt");
                 UserVehicleRepositoryInterface userVehicleRepo = new TxtUserVehicleRepository("user_vehicle.txt", vehicleRepo);
 
                 Vehicle vehicle = userVehicleRepo.getVehicleForUser(user.getMail());

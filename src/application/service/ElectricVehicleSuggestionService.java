@@ -14,10 +14,10 @@ public class ElectricVehicleSuggestionService {
     static List<ElectricVehicle> electricVehicles = repo.loadElectricVehicles();
 
 
-    public static void electricVehicleSuggestion(Vehicle vehicle){
+    public static void electricVehicleSuggestion(String eMail,Vehicle vehicle){
         TripRepositoryInterface repo2 = new TxtTripRepository("trip.txt");
         TripService tripService = new TripService(repo2);
-        List<Trip> trips = tripService.getAllTrips();
+        List<Trip> trips = tripService.getAllTrips(eMail);
         double totalDistance = 0.0;
         for (Trip trip : trips)
         {

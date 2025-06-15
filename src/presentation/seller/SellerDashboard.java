@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class SellerDashboard {
     private static final Scanner input = new Scanner(System.in);
     private static final VehicleService vehicleService =
-            new VehicleService(new TxtVehicleRepository("vehicle.txt"));
+            new VehicleService(new TxtVehicleRepository("seller_vehicle_system.txt"));
 
     public static void open(User user) {
         System.out.println("👋 Welcome Seller: " + user.getName());

@@ -45,10 +45,10 @@ public class OwnerDashboard {
                     showParts(vehicle);
                     break;
                 case "2":
-                    addMaintenance(vehicle);
+                    addMaintenance(user.getMail(),vehicle);
                     break;
                 case "3":
-                    showMaintenanceHistory(vehicle);
+                    showMaintenanceHistory(user, vehicle);
                     break;
                 case "4":
                     addTrip(user);
@@ -57,7 +57,7 @@ public class OwnerDashboard {
                     showTripHistory(user);
                     break;
                 case "6":
-                    ElectricVehicleSuggestionService.electricVehicleSuggestion(vehicle);
+                    ElectricVehicleSuggestionService.electricVehicleSuggestion(user.getMail(),vehicle);
                     break;
                     case "0":
                     return;
@@ -76,7 +76,7 @@ public class OwnerDashboard {
         }
     }
 
-    private static void addMaintenance(Vehicle vehicle) throws IOException {
+    private static void addMaintenance(String email,Vehicle vehicle) throws IOException {
         List<VehiclePart> parts = vehicle.getParts();
 
         System.out.println("\n🛠️ Choose the vehicle part for the maintenance:");
@@ -116,13 +116,13 @@ public class OwnerDashboard {
 
         //  Kayıt oluştur ve parçaya ekle
         MaintenanceRecord record = new MaintenanceRecord(desc, part);
-        part.addMaintenanceRecord(record);
+        part.addMaintenanceRecord(email,record);
 
         System.out.println(" Maintenance request has been successfully made.");
     }
 
 
-    private static void showMaintenanceHistory(Vehicle vehicle) {
+    private static void showMaintenanceHistory(User user,Vehicle vehicle) {
         List<VehiclePart> parts = vehicle.getParts();
 
         System.out.println("\n Choose the part you want to see the maintenance history:");
@@ -138,7 +138,7 @@ public class OwnerDashboard {
         }
 
         VehiclePart part = parts.get(index);
-        List<MaintenanceRecord> history = part.getMaintenanceHistory();
+        List<MaintenanceRecord> history = part.getMaintenanceHistory(user.getMail());
 
         if (history.isEmpty()) {
             System.out.println(" No maintenance record yet.");
@@ -232,7 +232,7 @@ public class OwnerDashboard {
             double cost= emissionService.fuelCost(user.getVehicle(),trip.getDistance());
             System.out.printf("Estimated Emission: %.2f KG of CO₂",co2);
             System.out.printf("Fuel cost of this trip: %.2f USD",cost);
-            tripService.saveTrip(trip);
+            tripService.saveTrip(user.getMail(), trip);
         }
     }
 
@@ -242,7 +242,7 @@ public class OwnerDashboard {
         TripService tripService = new TripService(repo);
 
 
-        List<Trip> trips = tripService.getAllTrips(); // tripService ile repodan bütün tripleri list'e atarız.
+        List<Trip> trips = tripService.getAllTrips(user.getMail()); // tripService ile repodan bütün tripleri list'e atarız.
 
         if (trips.isEmpty()) { // eğer boşsa geç
             System.out.println("\n No trip records found.");
