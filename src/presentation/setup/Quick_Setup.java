@@ -1,8 +1,5 @@
 package presentation.setup;
 
-import Infrastructure.MySQLVehicleRepository;
-import application.repository.SellerVehicleRepositoryInterface;
-import application.service.VehicleService;
 import domain.maintenance.*;
 import domain.vehicle.Vehicle;
 
@@ -14,7 +11,6 @@ public class Quick_Setup {
     public static Vehicle quickSetup() {
         System.out.println("Welcome to Quick Setup! Please introduce your vehicle to the program with quick setup.");
 
-
         List<VehiclePart> parts = new ArrayList<>();
 
         System.out.print("Enter vehicle brand: ");
@@ -22,7 +18,7 @@ public class Quick_Setup {
         System.out.print("Enter vehicle model: ");
         String model = input.nextLine();
         System.out.println("Enter vehicle segment (HATCHBACK, SEDAN, SUV, PICKUP, VAN)");
-        String segment =VehicleSegment();
+        String segment = VehicleSegment();
 
         // 1. Motor
         System.out.println("Enter fuel type (gasoline, diesel, electric, LPG):");
@@ -56,19 +52,7 @@ public class Quick_Setup {
         VehiclePart tire = PartFactory.createPart("tire", tireParams);
         parts.add(tire);
 
-        // 3. Battery
-        /*
-        System.out.println("Enter battery capacity (Ah):");
-        int capacityAh = Integer.parseInt(input.nextLine());
-
-        Map<String, Object> batteryParams = new HashMap<>();
-        batteryParams.put("capacityAh", capacityAh);
-
-        VehiclePart battery = PartFactory.createPart("battery", batteryParams);
-        parts.add(battery);
-        */
-
-        // 4. Brake System
+        // 3. Brake System
         System.out.println("Enter brake pad wear level (%):");
         double padWear = Double.parseDouble(input.nextLine());
         System.out.println("Does the vehicle have ABS? (true/false):");
@@ -78,10 +62,10 @@ public class Quick_Setup {
         brakeParams.put("padWearLevel", padWear);
         brakeParams.put("absEnabled", absEnabled);
 
-        VehiclePart brake = PartFactory.createPart("brake", brakeParams);
+        VehiclePart brake = PartFactory.createPart("brake system", brakeParams);
         parts.add(brake);
 
-        // 5. Cooling System
+        // 4. Cooling System
         System.out.println("Enter antifreeze level (liters):");
         double antifreeze = Double.parseDouble(input.nextLine());
         System.out.println("Enter minimum required antifreeze level:");
@@ -91,11 +75,11 @@ public class Quick_Setup {
         coolingParams.put("antifreezeLevel", antifreeze);
         coolingParams.put("minLevel", minLevel);
 
-        VehiclePart cooling = PartFactory.createPart("cooling_system", coolingParams);
+        VehiclePart cooling = PartFactory.createPart("cooling system", coolingParams);
         parts.add(cooling);
 
         // Vehicle oluştur
-        Vehicle vehicle = new Vehicle(brand,model,segment);
+        Vehicle vehicle = new Vehicle(brand, model, segment);
         for (VehiclePart part : parts) { // oluşturlan parçalar burada eklenir.
             vehicle.addPart(part);
         }
@@ -103,60 +87,45 @@ public class Quick_Setup {
         vehicle.setFuelType(motorType);
         vehicle.setHP(horsePower);
         vehicle.setFuelConsumption(fuelConsumption);
-        SellerVehicleRepositoryInterface repo = new MySQLVehicleRepository();
-        VehicleService service = new VehicleService(repo);
-        System.out.println("Quick setup complete. Vehicle and parts initialized.");
 
-        //!!!! sellerin şu özellikli şu isimli şu aracım var dediği ve kaydettiği txt dosyassı.
-        service.addVehicle(vehicle);
-        System.out.println("Vehicle has been registered to the system.");
+        System.out.println("Quick setup complete. Vehicle object created.");
 
+        // Bu kısımdaki veritabanına kaydetme kodları tamamen kaldırıldı.
+        // Bu metodun görevi sadece araç nesnesini oluşturup döndürmektir.
         return vehicle;
-
     }
 
-
-
-    public static String VehicleSegment(){
-        String vehicleSegment= input.nextLine();
-        if (vehicleSegment.equalsIgnoreCase("suv")){
+    public static String VehicleSegment() {
+        String vehicleSegment = input.nextLine();
+        if (vehicleSegment.equalsIgnoreCase("suv")) {
             return "SUV";
-        }
-        else if (vehicleSegment.equalsIgnoreCase("sedan")){
+        } else if (vehicleSegment.equalsIgnoreCase("sedan")) {
             return "SEDAN";
-        }
-        else if (vehicleSegment.equalsIgnoreCase("hatchback")){
+        } else if (vehicleSegment.equalsIgnoreCase("hatchback")) {
             return "HATCHBACK";
-        }
-        else if (vehicleSegment.equalsIgnoreCase("pickup")||vehicleSegment.equalsIgnoreCase("PICKUP")){
+        } else if (vehicleSegment.equalsIgnoreCase("pickup") || vehicleSegment.equalsIgnoreCase("PICKUP")) {
             return "PICKUP";
-        }
-        else if (vehicleSegment.equalsIgnoreCase("van")){
+        } else if (vehicleSegment.equalsIgnoreCase("van")) {
             return "VAN";
-        }
-        else {
+        } else {
             System.out.println("Undefined segment, please specify an existing segment (SUV,SEDAN,HATCHBACK,PICKUP,VAN)");
             return VehicleSegment();
         }
     }
 
-    public static String motorType(){
-        String motorType= input.nextLine();
-        if (motorType.equalsIgnoreCase("gasoline")||motorType.equalsIgnoreCase("gasolıne")){
+    public static String motorType() {
+        String motorType = input.nextLine();
+        if (motorType.equalsIgnoreCase("gasoline") || motorType.equalsIgnoreCase("gasolıne")) {
             return "gasoline";
-        }
-        else if (motorType.equalsIgnoreCase("diesel")||motorType.equalsIgnoreCase("dıesel")){
+        } else if (motorType.equalsIgnoreCase("diesel") || motorType.equalsIgnoreCase("dıesel")) {
             return "diesel";
-        }
-        else if (motorType.equalsIgnoreCase("electric")||motorType.equalsIgnoreCase("electrıc")){
+        } else if (motorType.equalsIgnoreCase("electric") || motorType.equalsIgnoreCase("electrıc")) {
             return "electric";
-        }
-        else if (motorType.equalsIgnoreCase("lpg")){
+        } else if (motorType.equalsIgnoreCase("lpg")) {
             return "LPG";
-        }
-        else{
+        } else {
             System.out.println("Undefined fuel type, please specify an existing fuel type (gasoline, dieseL, electric, LPG");
-        return motorType();
+            return motorType();
         }
     }
 }

@@ -19,14 +19,14 @@ public class SellerDashboard {
         while (true) {
             System.out.println("\n Seller Dashboard");
             System.out.println("1. Add new vehicle");
-            System.out.println("2. List all vehicles");
+            System.out.println("2. List my vehicles");
             System.out.println("0. Exit");
             System.out.print("Your choice: ");
             String choice = input.nextLine();
 
             switch (choice) {
-                case "1" -> addNewVehicle();
-                case "2" -> listVehicles();
+                case "1" -> addNewVehicle(user);
+                case "2" -> listVehicles(user);
                 case "0" -> {
                     System.out.println("Logging out...");
                     return;
@@ -36,27 +36,25 @@ public class SellerDashboard {
         }
     }
 
-    private static void addNewVehicle() {
-        Vehicle vehicle = Quick_Setup.quickSetup(); // setup ile araç oluştur
+    private static void addNewVehicle(User user) {
+        Vehicle vehicle = Quick_Setup.quickSetup();
         if (vehicle != null) {
-            vehicleService.addVehicle(vehicle); // dosyaya kaydet
-            System.out.println("Vehicle saved to system.");
+            vehicleService.addVehicle(vehicle, user.getMail());
         }
-
     }
 
-    private static void listVehicles() {
-        List<Vehicle> vehicles = vehicleService.getAllVehicles();
+    private static void listVehicles(User user) {
+        List<Vehicle> vehicles = vehicleService.getAllVehiclesBySeller(user.getMail());
 
         if (vehicles.isEmpty()) {
-            System.out.println("No vehicles registered in the system.");
+            System.out.println("Sisteme kayıtlı hiçbir aracınız bulunmamaktadır.");
             return;
         }
 
         System.out.println("\nRegistered Vehicles:");
         for (int i = 0; i < vehicles.size(); i++) {
             Vehicle v = vehicles.get(i);
-            System.out.println((i + 1)+" - " + v.getBrand() + " " + v.getModel()+" "+ v.getVehicleSegment());
+            System.out.println((i + 1) + " - " + v.getBrand() + " " + v.getModel() + " " + v.getVehicleSegment());
         }
     }
 }
